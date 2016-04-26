@@ -7,7 +7,7 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +24,91 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section data-markdown>
+                    <script type="text/template">
+                        # Scriptable Grouper
+                        ## Lafayette College&apos;s Big Fish Story
+                    </script>
+                </section>
+                <section>
+                    <ul>
+                        <li><h3>Who am I?</h3></li>
+                        <li><h3>What is Internet2 Grouper?</h3></li>
+                    </ul>
+                    <aside class="notes">
+                        <ul>
+                            <li>I am Carl Waldbieser</li>
+                            <li>I am the Systems Programmer at Lafayette College.</li>
+                            <li>Much of the work I do for the College revolves around identity management and access control.</li>
+                        </ul>
+                        <ul>
+                            <li>Internet2 Grouper is middleware that allows you to allows you to compose, combine, and manage groups, roles, and permissions.</li>
+                            <li>It can be used as a single point of control to manage memberships across applications.</li>
+                            <li>It allows management of groups to be delegated to collaborators.</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h2>Charting a Course</h2>
+                    <img src="/img/treasure_map.png" />
+                    <aside class="notes">
+                        <ul>
+                            <li>We have these great tools-- now what?</li>
+                            <li>We looked at how lots of other institutions were organizing their Groupers.</li>
+                            <li>
+                                We settled on a basic 3-part hierarchy: apps, orgs, and refs.  
+                                    <ul>
+                                        <li> Orgs mirrors an org-chart.</li>
+                                        <li>Refs are reference groups that are either data-driven or maintained directly in Grouper.</li>
+                                        <li>Apps are where application specific policies are composed and exported to provisioners.</li>
+                                    </ul>
+                            </li>
+                            <li>The New UI is really great for a lot of routine tasks.  But when there are gaps in the functionality, you need to use the Grouper API.  The typical way of doing this is to use the Grouper shell (GSH).</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h2>First Impressions</h2>
+                    <img src="/img/c64.png" />
+                    <aside class="notes">
+                        <ul>
+                            <li>GSH allows you to work directly with the Grouper API at a fairly low level.</li>
+                            <li>If you don't have familiarity with Java, the API can be rather daunting.</li>
+                            <li>Even if you are proficient in Java, the API vocabulary is made of primitives.</li>
+                            <li>GSH is a no-frills REPL that doesn't lend itself well to experimentation or introspection.</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h2>Reduce, Reuse, Recycle</h2>
+                    <img src="/img/recycle.png" />
+                    <aside class="notes">
+                        <ul>
+                            <li>Modern REPLs were a problem that had been solved many, *many* times.</li>
+                            <li>First attempt-- I wrapped GSH using Python's `cmd` module.  Readline and history support.</li>
+                            <li>Dave L. on grouper-users mail list suggested I try Bill Thompson's `groovysh4grouper`.</li>
+                            <li>Interesting fact-- Bill Thompson, formerly of Unicon, had recently become the Director of Digital Infrastructure at Lafayette College.</li>
+                            <li>The Big Idea-- a lot of scripting languages exist for the JVM.  They all support modern REPL environments and tab-completion.  Import the Grouper primitives into the REPL environment of your choice.</li>
+                            <li>Bill had managed to do this for the Groovy scripting language.</li>
+                            <li>I added support for Clojure and Jython (I am a big Python fan).</li>
+                        </ul>
+                    </aside>
+                </section>
+                <section>
+                    <h2>Putting the Pieces Together</h2>
+                    <img src="/img/puzzle.png" />
+                    <aside class="notes">
+                        <ul>
+                            <li>For sys-admins, the primitives are too *primitive*.</li>
+                            <li>Need for higher order functions:</li>
+                            <ul>
+                                <li>Create application skeletons</li>
+                                <li>Link groups to the Grouper Loader.</li>
+                                <li>Create time-based rules.</li>
+                            </ul>
+                        </ul>
+                    </aside>
+                </section>
 			</div>
 		</div>
 
