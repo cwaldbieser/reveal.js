@@ -68,99 +68,91 @@
                     </aside>
                 </section>
                 <section>
-                    <h2>First Impressions</h2>
-                    <img src="/img/c64.png" />
+                    <h2>This is the Shell?!</h2>
+                    <img src="/img/seashell.png" />
                     <aside class="notes">
                         <ul>
                             <li>GSH allows you to work directly with the Grouper API at a fairly low level.</li>
                             <li>If you don't have familiarity with Java, the API can be rather daunting.</li>
                             <li>Even if you are proficient in Java, the API vocabulary is made of primitives.</li>
+                            <li>For busy sys-admins, the primitives are too *primitive*.</li>
                             <li>GSH is a no-frills REPL that doesn't lend itself well to experimentation or introspection.</li>
                         </ul>
                     </aside>
                 </section>
                 <section>
-                    <h2>Reduce, Reuse, Recycle</h2>
-                    <img src="/img/recycle.png" />
+                    <h2>A Plethora of Cool Shells</h2>
+                    <img src="/img/many-shells.png" />
                     <aside class="notes">
                         <ul>
                             <li>Modern REPLs were a problem that had been solved many, *many* times.</li>
                             <li>First attempt-- I wrapped GSH using Python's `cmd` module.  Readline and history support.</li>
                             <li>Dave Langenberg on grouper-users mail list suggested I try Bill Thompson's `groovysh4grouper`.</li>
-                            <li>Interesting fact-- Bill Thompson, formerly of Unicon, had recently become the Director of Digital Infrastructure at Lafayette College.</li>
-                            <li>The Big Idea-- a lot of scripting languages exist for the JVM.  They all support modern REPL environments and tab-completion.  Import the Grouper primitives into the REPL environment of your choice.</li>
-                            <li>Bill had managed to do this for the Groovy scripting language.</li>
+                            <li>groovysh4grouper imported the Grouper API into its own REPL.</li>
                             <li>I added support for Clojure and Jython (I am a big Python fan).</li>
+                            <li>
+                                I created functions to orchestrate common tasks:
+                                <ul>
+                                    <li>Create application skeletons</li>
+                                    <li>Link groups to the Grouper Loader.</li>
+                                    <li>Create time-based rules.</li>
+                                </ul>
+                            </li>
                         </ul>
                     </aside>
                 </section>
                 <section>
-                    <h2>Putting the Pieces Together</h2>
-                    <img src="/img/puzzle.png" />
-                    <aside class="notes">
-                        <ul>
-                            <li>For sys-admins, the primitives are too *primitive*.</li>
-                            <li>Need for higher order functions:</li>
-                            <ul>
-                                <li>Create application skeletons</li>
-                                <li>Link groups to the Grouper Loader.</li>
-                                <li>Create time-based rules.</li>
-                            </ul>
-                        </ul>
-                    </aside>
-                </section>
-                <section>
-                    <h2>How Far Can This Go?</h2>
-                    <img src="/img/hidden-galaxy.png" />
+                    <h2>How Much Could We Wrap?</h2>
+                    <img src="/img/kraken.png" />
                     <aside class="notes">
                         <ul>
                             <li>When Lafayette began its Grouper pilot, the Provisioning Service Provider (PSP) was the only supported option for provisioning external systems.</li>
                             <li>The PSP was an incomplete SPMLv2 provisioning service provider that was fed by a Shibboleth attribute resolver.</li>
-                            <li>It was a lot more complicated than what a lot of deployers (including Lafayette) needed.</li>
+                            <li>It was a lot more complicated than what Lafayette needed.</li>
                             <li>
-                                Bill Thompson suggested that the PSP was going the way of the dinosaurs, 
-                                and we should "beg, borrow, or steal" something called a "change log consumer" from the community.
+                                Bill Thompson suggested that we should "beg, borrow, or steal"
+                                a change log consumer from the community.
                             </li>
-                            <li>I realized there was a really simple change log consumer baked into Grouper: `edu.internet2.middleware.grouper.changeLog.ChangeLogConsumer`</li>
+                            <li>
+                                While exploring several options, I realized there was a really
+                                simple change log consumer baked into Grouper: 
+                                `edu.internet2.middleware.grouper.changeLog.ChangeLogConsumer`
+                            </li>
                             <li>I bet it wouldn't be hard to script it using Jython!</li>
                             <li>The original Jython changelog consumer was just 218 lines of code.</li>
                             <li>The original message format was `group` + newline + `subject` + newline + `action`.</li>
-                            <li>The idea was when the Grouper project came out with something better, we'd ditch our change log consumer for theirs.</li>
-                            <li>In May of 2015, Bill told me that the Grouper project was leaning toward connecting provisioners to change log consumers via message queues.</li>
+                            <li>
+                                In May of 2015, Bill told me that the Grouper project was leaning 
+                                toward connecting provisioners to change log consumers via message queues.
+                            </li>
                             <li>I looked at ActiveMQ and RabbitMQ, and decided I liked the latter.</li>
-                            <li>Over June and July of 2015, I rewrote portions of the code base so that our changelog consumer sent AMQP messages, and our LDAP provisioners read AMQP messages.</li>
+                            <li>
+                                Over June and July of 2015, I rewrote portions of the code base 
+                                so that our changelog consumer sent AMQP messages, and our LDAP 
+                                provisioners read AMQP messages.
+                            </li>
                             <li>The scripted changelogger grew to 372 lines of code.</li>
                         </ul>
                     </aside>
                 </section>
                 <section>
-                    <h2>Choices, Decisions, Complexity, &amp; Simplicity</h2>
-                    <img src="/img/mazecraze.png" />
+                    <h2>A Diverse Ecosystem</h2>
+                    <img src="/img/fish.png" />
                     <aside class="notes">
-                        <ul>
-                            <li>Why?!?</li>
-                            <li>As an administrator, I wanted to strive for simplicity.</li>
+                            Why all these scripting languages?  Why not just stick with plain old Java?  
+                            Doesn't this waste limited community resources?
+
                             <li>
-                                Simplicity Quotes:
-                                <ul>
-                                    <li>Simplicity is prerequisite for reliability.  --Edsger W. Dijkstra</li>
-                                    <li>Simplicity is the key to brilliance. --Bruce Lee</li>
-                                </ul>
+                                At Lafayette, we had specific goals for Grouper.  And they may or
+                                may not align with the goals of your institution.  What works for 
+                                your institution might be completely different.
                             </li>
-                            <li>Systems that try to satisfy everyone tend not to satisfy *anyone*.  (The PSP is a good example of this.)</li>
-                            <li>At Lafayette, we had specific plans in mind.  What works for your institution might be completely different.</li>
+                            <li>Who in Higher Ed wants to work in a place they want to become *less* diverse?</li>
                             <li>
-                                Why all these scripting languages?  Why not just stick with plain old Java?  
-                                Doesn't this waste limited community resources?  Isn't this just unneeded complexity?
-                                <ul>
-                                    <li>Simplicity is the opposite of complexity, but not the opposite of *diversity*.</li>
-                                    <li>Who in higher ed works in a place where they want to become *less* diverse?</li>
-                                    <li>
-                                        By not supporting a language, a platform, or a tool set, you don't convert people to your community.  
-                                        You risk *losing* or *alienating* people who might otherwise want to be part of your community.
-                                    </li>
-                                    <li>There is a balance to be struck.</li>
-                                </ul>
+                                By not supporting a language, a platform, or a tool set, 
+                                you don't convert people to your community.  
+                                You risk *losing* or *alienating* people who might otherwise 
+                                want to be part of your community.
                             </li>
                         </ul>
                     </aside>
