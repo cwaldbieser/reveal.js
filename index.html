@@ -64,8 +64,14 @@
                         <h2>Charting a Course</h2>
                         <img src="/img/treasure_map.png" />
                         <aside class="notes">
+                            We implemented a Grouper pilot at Lafayette-- it was well received ... 
+                        </aside>
+                    </section>
+                    <section>
+                        <img src="/img/cheering.png" />
+                        <aside class="notes">
                             <ul>
-                                <li>We implemented a Grouper pilot at Lafayette-- it was a roaring success</li>
+                                <li>... *very* well received.</li>
                                 <li>We have these great tools-- now what?</li>
                                 <li>We looked at how lots of other institutions were organizing their Groupers.</li>
                                 <li>
@@ -76,6 +82,7 @@
                                             <li>Apps are where application specific policies are composed and exported to provisioners.</li>
                                         </ul>
                                 </li>
+                                <li>We really liked the new UI ...</li>
                             </ul>
                         </aside>
                     </section>
@@ -103,25 +110,63 @@
                     </aside>
                 </section>
                 <section>
-                    <h2>A Plethora of Cool Shells</h2>
-                    <img src="/img/many-shells.png" />
-                    <aside class="notes">
-                        <ul>
-                            <li>Modern REPLs were a problem that had been solved many, *many* times.</li>
-                            <li>First attempt-- I wrapped GSH using Python's `cmd` module.  Readline and history support.</li>
-                            <li>Dave Langenberg on grouper-users mail list suggested I try Bill Thompson's `groovysh4grouper`.</li>
-                            <li>groovysh4grouper imported the Grouper API into its own REPL.</li>
-                            <li>I added support for Clojure and Jython (I am a big Python fan).</li>
-                            <li>
-                                I created functions to orchestrate common tasks:
-                                <ul>
-                                    <li>Create application skeletons</li>
-                                    <li>Link groups to the Grouper Loader.</li>
-                                    <li>Create time-based rules.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </aside>
+                    <section>
+                        <h2>A Plethora of Cool Shells</h2>
+                        <img src="/img/many-shells.png" />
+                        <aside class="notes">
+                            <ul>
+                                <li>Modern REPLs were a problem that had been solved many, *many* times.</li>
+                                <li>First attempt-- I wrapped GSH using Python's `cmd` module.  Readline and history support.</li>
+                                <li>Dave Langenberg on grouper-users mail list suggested I try Bill Thompson's `groovysh4grouper`.</li>
+                                <li>groovysh4grouper imported the Grouper API into its own REPL.</li>
+                                <li>I added support for Clojure and Jython (I am a big Python fan).</li>
+                                <li>
+                                    I created functions to orchestrate common tasks:
+                                    <ul>
+                                        <li>Create application skeletons</li>
+                                        <li>Link groups to the Grouper Loader.</li>
+                                        <li>Create time-based rules.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </aside>
+                    </section>
+                    <section>
+                        <pre><code data-trim>
+[root@grouper0 DEV grouper.apiBinary-2.2.2]# ./bin/gsh.jython
+Using GROUPER_HOME: /opt/internet2/grouper/grouper.apiBinary-2.2.2
+Using GROUPER_CONF: /opt/internet2/grouper/grouper.apiBinary-2.2.2/conf
+Using JAVA: java
+using MEMORY: 64m-750m
+>>> import sys
+>>> sys.path.append("/root/grouper_scripts")
+>>> import skeleton      
+>>> print(skeleton.createAppSkeleton.__doc__)
+
+    Create the skeleton folder structure for a new application including
+    an administrative group.
+    
+    :param:`session`: Grouper session.
+    :param:`parent_stem_path`: String path to parent folder.
+    :param:`app_extension`: String name of the app folder (*not* full path).
+    :param:`app_name`: String "friendly" name of app folder (defaults to app extension).
+    
+>>> session = getRootSession()
+Grouper starting up: version: 2.2.2, build date: null, env: &lt;no label configured&gt;
+grouper.properties read from: /var/opt/internet2/grouper/grouper.apiBinary/conf/grouper.properties
+Grouper current directory is: /var/opt/internet2/grouper/grouper.apiBinary
+log4j.properties read from:   /var/opt/internet2/grouper/grouper.apiBinary/conf/log4j.properties
+Grouper is logging to file:   /var/opt/internet2/grouper/grouper.apiBinary/logs/grouper_error.log, at min level WARN for package: edu.internet2.middleware.grouper, based on log4j.properties
+grouper.hibernate.properties: /var/opt/internet2/grouper/grouper.apiBinary/conf/grouper.hibernate.properties
+grouper.hibernate.properties: null@null
+sources.xml read from:        /var/opt/internet2/grouper/grouper.apiBinary/conf/sources.xml
+sources.xml groupersource id: g:gsa
+sources.xml ldap source id:   ldap: /etc/grouper/ldap.local.properties
+sources.xml groupersource id: grouperEntities
+sources.xml jdbc source id:   jdbc: GrouperJdbcConnectionProvider
+>>>
+                         </code></pre>
+                    </section>
                 </section>
                 <section>
                     <h2>How Much Could We Wrap?</h2>
