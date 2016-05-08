@@ -55,6 +55,7 @@
                                 <li>Internet2 Grouper is middleware that allows you to allows you to compose, combine, and manage groups, roles, and permissions.</li>
                                 <li>It can be used as a single point of control to manage memberships across applications.</li>
                                 <li>It allows management of groups to be delegated to collaborators.</li>
+                                <li>So we put together an implementation plan, and we charted a course for our Grouper journey...</li>
                             </ul>
                         </aside>
                     </section>
@@ -163,41 +164,56 @@ sources.xml groupersource id: grouperEntities
 sources.xml jdbc source id:   jdbc: GrouperJdbcConnectionProvider
 >>>
                          </code></pre>
+                        <aside class="notes">
+                            <ul>
+                                <li>Here is an example of the Grouper API wrapped in a Jython session.</li>
+                                <li>At this point, I began to wonder, just how much could we wrap?</li>
+                            </ul>
+                        </aside>
                     </section>
                 </section>
                 <section>
-                    <img src="/img/kraken.png" />
-                    <aside class="notes">
-                        <ul>
-                            <li>How Much Could We Wrap?</li>
-                            <li>When Lafayette began its Grouper pilot, the Provisioning Service Provider (PSP) was the only supported option for provisioning external systems.</li>
-                            <li>The PSP was an incomplete SPMLv2 provisioning service provider that was fed by a Shibboleth attribute resolver.</li>
-                            <li>It was a lot more complicated than what Lafayette needed.</li>
-                            <li>
-                                Bill Thompson suggested that we should "beg, borrow, or steal"
-                                a change log consumer from the community.
-                            </li>
-                            <li>
-                                While exploring several options, I realized there was a really
-                                simple change log consumer baked into Grouper: 
-                                `edu.internet2.middleware.grouper.changeLog.ChangeLogConsumer`
-                            </li>
-                            <li>I bet it wouldn't be hard to script it using Jython!</li>
-                            <li>The original Jython changelog consumer was just 218 lines of code.</li>
-                            <li>The original message format was `group` + newline + `subject` + newline + `action`.</li>
-                            <li>
-                                In May of 2015, Bill told me that the Grouper project was leaning 
-                                toward connecting provisioners to change log consumers via message queues.
-                            </li>
-                            <li>I looked at ActiveMQ and RabbitMQ, and decided I liked the latter.</li>
-                            <li>
-                                Over June and July of 2015, I rewrote portions of the code base 
-                                so that our changelog consumer sent AMQP messages, and our LDAP 
-                                provisioners read AMQP messages.
-                            </li>
-                            <li>The scripted changelogger grew to 372 lines of code.</li>
-                        </ul>
-                    </aside>
+                    <section>
+                        <img src="/img/kraken.png" />
+                        <aside class="notes">
+                            <ul>
+                                <li>When Lafayette began its Grouper pilot, the Provisioning Service Provider (PSP) was the only supported option for provisioning external systems.</li>
+                                <li>The PSP was an incomplete SPMLv2 provisioning service provider that was fed by a Shibboleth attribute resolver.</li>
+                                <li>It was a lot more complicated than what Lafayette needed.</li>
+                                <li>
+                                    Bill Thompson suggested that we should "beg, borrow, or steal"
+                                    a change log consumer from the community.
+                                </li>
+                                <li>
+                                    While exploring several options, I realized there was a really
+                                    simple change log consumer baked into Grouper: 
+                                    `edu.internet2.middleware.grouper.changeLog.ChangeLogConsumer`
+                                </li>
+                                <li>I bet it wouldn't be hard to script it using Jython!</li>
+                                <li>The original Jython changelog consumer was just 218 lines of code.</li>
+                                <li>The original message format was `group` + newline + `subject` + newline + `action`.</li>
+                            </ul>
+                        </aside>
+                    </section>
+                    <section>
+                        <img src="img/architecture.png" />
+                        <aside class="notes">
+                            <ul>
+                                <li>Architectures change to suit needs and asthetics.</li>
+                                <li>
+                                    In May of 2015, Bill told me that the Grouper project was discussing 
+                                    connecting Grouper to provisioners via message queues.
+                                </li>
+                                <li>I looked at ActiveMQ and RabbitMQ, and decided I liked the latter.</li>
+                                <li>
+                                    Over June and July of 2015, I rewrote portions of the code base 
+                                    so that our changelog consumer sent AMQP messages, and our LDAP 
+                                    provisioners read AMQP messages.
+                                </li>
+                                <li>The scripted changelogger grew to 372 lines of code.</li>
+                            </ul>
+                        </aside>
+                    </section>
                 </section>
                 <section>
                     <img src="/img/fish.png" />
