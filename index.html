@@ -196,6 +196,14 @@ sources.xml jdbc source id:   jdbc: GrouperJdbcConnectionProvider
                         </aside>
                     </section>
                     <section>
+                        <img src="img/provision-v1.png" />
+                        <aside class="notes">
+                            <ul>
+                                <li>Grouper provisioning architectures v1 at LC.</li>
+                            </ul>
+                        </aside>
+                    </section>
+                    <section>
                         <img src="img/architecture.png" />
                         <aside class="notes">
                             <ul>
@@ -204,13 +212,44 @@ sources.xml jdbc source id:   jdbc: GrouperJdbcConnectionProvider
                                     In May of 2015, Bill told me that the Grouper project was discussing 
                                     connecting Grouper to provisioners via message queues.
                                 </li>
-                                <li>I looked at ActiveMQ and RabbitMQ, and decided I liked the latter.</li>
                                 <li>
                                     Over June and July of 2015, I rewrote portions of the code base 
                                     so that our changelog consumer sent AMQP messages, and our LDAP 
                                     provisioners read AMQP messages.
                                 </li>
                                 <li>The scripted changelogger grew to 372 lines of code.</li>
+                            </ul>
+                        </aside>
+                    </section>
+                    <section>
+                        <img src="img/provision-v2.png" />
+                        <aside class="notes">
+                            <ul>
+                                <li>Grouper provisioning architectures v2 at LC.</li>
+                                <li>Introduced a message exchange ala RabbitMQ.</li>
+                                <li>
+                                    Initially I didn't see any advantage, but later 
+                                    realized we could run provisioners in parallel.
+                                </li>
+                            </ul>
+                        </aside>
+                    </section>
+                    <section>
+                        <img src="img/provision-v3.png" />
+                        <aside class="notes">
+                            <ul>
+                                <li>Grouper provisioning architecture v3 at LC.</li>
+                                <li>Separates the routing logic from the event sources.</li>
+                                <li>Supports membership provisioners and account provisioners.</li>
+                                <li>Account provisioners care about attributes.</li>
+                            </ul>
+                        </aside>
+                    </section>
+                    <section>
+                        <img src="img/psd-architecture.png" />
+                        <aside class="notes">
+                            <ul>
+                                <li>Provisioning Delivery Service (Kiki) at LC.</li>
                             </ul>
                         </aside>
                     </section>
