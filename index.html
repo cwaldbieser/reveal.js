@@ -25,273 +25,45 @@
 		<div class="reveal">
 			<div class="slides">
                 <section>
-                    <img src="/img/apereo-title.png" />
-                </section>
-				<section data-markdown>
-                    <script type="text/template">
-                        # Scriptable Grouper
-                        ## Lafayette College&apos;s Big Fish Story
-                    </script>
+                    <img src="/img/title.png" />
                 </section>
                 <section>
-                    <section>
-                        <ul>
-                            <li><h3>Who am I?</h3></li>
-                            <li><h3>What is Internet2 Grouper?</h3></li>
-                        </ul>
-                    </section>
-                    <section>
-                        <img src="/img/code-ninja.png" />
-                        <aside class="notes">
-                            <ul>
-                                <li>I am Carl Waldbieser</li>
-                                <li>I am the Systems Programmer at Lafayette College.</li>
-                                <li>Much of the work I do for the College revolves around identity management and access control.</li>
-                            </ul>
-                        </aside>
-                    </section>
-                    <section>
-                        <img src="/img/futuristic-city.png" />
-                        <aside class="notes">
-                            <ul>
-                                <li>Grouper changes everything.</li>
-                                <li>Internet2 Grouper is middleware that allows you to allows you to compose, combine, and manage groups, roles, and permissions.</li>
-                                <li>It can be used as a single point of control to manage memberships across applications.</li>
-                                <li>It allows management of groups to be delegated to collaborators.</li>
-                                <li>So we put together an implementation plan, and we charted a course for our Grouper journey...</li>
-                            </ul>
-                        </aside>
-                    </section>
-                </section>
-                <section>
-                    <section>
-                        <img src="/img/treasure_map.png" />
-                        <aside class="notes">
-                            We implemented a Grouper pilot at Lafayette-- it was well received ... 
-                        </aside>
-                    </section>
-                    <section>
-                        <img src="/img/cheering.png" />
-                        <aside class="notes">
-                            <ul>
-                                <li>... *very* well received.</li>
-                                <li>We have these great tools-- now what?</li>
-                                <li>We looked at how lots of other institutions were organizing their Groupers.</li>
-                                <li>
-                                    We settled on a basic 3-part hierarchy: apps, orgs, and refs.  
-                                        <ul>
-                                            <li>Orgs mirrors an org-chart.</li>
-                                            <li>Refs are reference groups that are either data-driven or maintained directly in Grouper.</li>
-                                            <li>Apps are where application specific policies are composed and exported to provisioners.</li>
-                                        </ul>
-                                </li>
-                                <li>We really liked the new UI ...</li>
-                            </ul>
-                        </aside>
-                    </section>
-                    <section>
-                        <img src="/img/futuristic-computer.png" />
-                        <aside class="notes">
-                                The New UI is really great for a lot of routine tasks.
-                                But when there are gaps in the functionality, you need
-                                to use the Grouper API.  
-                                The typical way of doing this is to use the Grouper shell (GSH).
-                        </aisde>
-                    </section>
-                </section>
-                <section>
-                    <img src="/img/seashell.png" />
+                    <img src="/img/traditional-constituents.png" />
                     <aside class="notes">
                         <ul>
-                            <li>GSH allows you to work directly with the Grouper API at a fairly low level.</li>
-                            <li>If you don't have familiarity with Java, the API can be rather daunting.</li>
-                            <li>Even if you are proficient in Java, the API vocabulary is made of primitives.</li>
-                            <li>For busy sys-admins, the primitives are too *primitive*.</li>
-                            <li>GSH is a no-frills REPL that doesn't lend itself well to experimentation or introspection.</li>
+                            <li>At Lafayette College the identity management provisioning/deprovisioning system is a collection of scripts.</li>
+                            <li>All traditional identites tie back to the College ERP (Banner).</li>
+                            <li>Employee workflow is triggered by HR or Provost office.</li>
+                            <li>Scripts mostly automate employee onboarding/terms.  Requires some simple manual intervention in some cases.</li>
+                            <li>Student onboarding is a coordinated effort that starts with Office of Admissions.  When the incoming class has been determined, admissions provides student data to ITS to provision the identities en masse.</li>
+                            <li>Part time students, transfer students, exchange students originate from different offices, but are handled in a similar fashion on a smaller scale.</li>
+                            <li>Systems are not perfect, but they are generally effective. These identities are well managed.</li>
                         </ul>
                     </aside>
                 </section>
                 <section>
-                    <section>
-                        <img src="/img/many-shells.png" />
-                        <aside class="notes">
-                            <ul>
-                                <li>Modern REPLs were a problem that had been solved many, *many* times.</li>
-                                <li>First attempt-- I wrapped GSH using Python's `cmd` module.  Readline and history support.</li>
-                                <li>Dave Langenberg on grouper-users mail list suggested I try Bill Thompson's `groovysh4grouper`.</li>
-                                <li>groovysh4grouper imported the Grouper API into its own REPL.</li>
-                                <li>I added support for Clojure and Jython (I am a big Python fan).</li>
-                                <li>
-                                    I created functions to orchestrate common tasks:
-                                    <ul>
-                                        <li>Create application skeletons</li>
-                                        <li>Link groups to the Grouper Loader.</li>
-                                        <li>Create time-based rules.</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </aside>
-                    </section>
-                    <section>
-                        <pre><code data-trim>
-[root@grouper0 DEV grouper.apiBinary-2.2.2]# ./bin/gsh.jython
-Using GROUPER_HOME: /opt/internet2/grouper/grouper.apiBinary-2.2.2
-Using GROUPER_CONF: /opt/internet2/grouper/grouper.apiBinary-2.2.2/conf
-Using JAVA: java
-using MEMORY: 64m-750m
->>> import sys
->>> sys.path.append("/root/grouper_scripts")
->>> import skeleton      
->>> print(skeleton.createAppSkeleton.__doc__)
-
-    Create the skeleton folder structure for a new application including
-    an administrative group.
-    
-    :param:`session`: Grouper session.
-    :param:`parent_stem_path`: String path to parent folder.
-    :param:`app_extension`: String name of the app folder (*not* full path).
-    :param:`app_name`: String "friendly" name of app folder (defaults to app extension).
-    
->>> session = getRootSession()
-Grouper starting up: version: 2.2.2, build date: null, env: &lt;no label configured&gt;
-grouper.properties read from: /var/opt/internet2/grouper/grouper.apiBinary/conf/grouper.properties
-Grouper current directory is: /var/opt/internet2/grouper/grouper.apiBinary
-log4j.properties read from:   /var/opt/internet2/grouper/grouper.apiBinary/conf/log4j.properties
-Grouper is logging to file:   /var/opt/internet2/grouper/grouper.apiBinary/logs/grouper_error.log, at min level WARN for package: edu.internet2.middleware.grouper, based on log4j.properties
-grouper.hibernate.properties: /var/opt/internet2/grouper/grouper.apiBinary/conf/grouper.hibernate.properties
-grouper.hibernate.properties: null@null
-sources.xml read from:        /var/opt/internet2/grouper/grouper.apiBinary/conf/sources.xml
-sources.xml groupersource id: g:gsa
-sources.xml ldap source id:   ldap: /etc/grouper/ldap.local.properties
-sources.xml groupersource id: grouperEntities
-sources.xml jdbc source id:   jdbc: GrouperJdbcConnectionProvider
->>>
-                         </code></pre>
-                        <aside class="notes">
-                            <ul>
-                                <li>Here is an example of the Grouper API wrapped in a Jython session.</li>
-                                <li>At this point, I began to wonder, just how much could we wrap?</li>
-                            </ul>
-                        </aside>
-                    </section>
+                    <img src="/img/well-managed-identities.png" />
                 </section>
                 <section>
-                    <section>
-                        <img src="/img/kraken.png" />
-                        <aside class="notes">
-                            <ul>
-                                <li>When Lafayette began its Grouper pilot, the Provisioning Service Provider (PSP) was the only supported option for provisioning external systems.</li>
-                                <li>The PSP was an incomplete SPMLv2 provisioning service provider that was fed by a Shibboleth attribute resolver.</li>
-                                <li>It was a lot more complicated than what Lafayette needed.</li>
-                                <li>
-                                    Bill Thompson suggested that we should "beg, borrow, or steal"
-                                    a change log consumer from the community.
-                                </li>
-                                <li>
-                                    While exploring several options, I realized there was a really
-                                    simple change log consumer baked into Grouper: 
-                                    `edu.internet2.middleware.grouper.changeLog.ChangeLogConsumer`
-                                </li>
-                                <li>I bet it wouldn't be hard to script it using Jython!</li>
-                                <li>The original Jython changelog consumer was just 218 lines of code.</li>
-                                <li>The original message format was `group` + newline + `subject` + newline + `action`.</li>
-                            </ul>
-                        </aside>
-                    </section>
-                    <section>
-                        <img src="img/provision-v1.png" />
-                        <aside class="notes">
-                            <ul>
-                                <li>Grouper provisioning architectures v1 at LC.</li>
-                            </ul>
-                        </aside>
-                    </section>
-                    <section>
-                        <img src="img/architecture.png" />
-                        <aside class="notes">
-                            <ul>
-                                <li>Architectures change to suit needs and asthetics.</li>
-                                <li>
-                                    In May of 2015, Bill told me that the Grouper project was discussing 
-                                    connecting Grouper to provisioners via message queues.
-                                </li>
-                                <li>
-                                    Over June and July of 2015, I rewrote portions of the code base 
-                                    so that our changelog consumer sent AMQP messages, and our LDAP 
-                                    provisioners read AMQP messages.
-                                </li>
-                                <li>The scripted changelogger grew to 372 lines of code.</li>
-                            </ul>
-                        </aside>
-                    </section>
-                    <section>
-                        <img src="img/provision-v2.png" />
-                        <aside class="notes">
-                            <ul>
-                                <li>Grouper provisioning architectures v2 at LC.</li>
-                                <li>Introduced a message exchange ala RabbitMQ.</li>
-                                <li>
-                                    Initially I didn't see any advantage, but later 
-                                    realized we could run provisioners in parallel.
-                                </li>
-                            </ul>
-                        </aside>
-                    </section>
-                    <section>
-                        <img src="img/provision-v3.png" />
-                        <aside class="notes">
-                            <ul>
-                                <li>Grouper provisioning architecture v3 at LC.</li>
-                                <li>Separates the routing logic from the event sources.</li>
-                                <li>Supports membership provisioners and account provisioners.</li>
-                                <li>Account provisioners care about attributes.</li>
-                            </ul>
-                        </aside>
-                    </section>
-                    <section>
-                        <img src="img/psd-architecture.png" />
-                        <aside class="notes">
-                            <ul>
-                                <li>Provisioning Delivery Service (Kiki) at LC.</li>
-                            </ul>
-                        </aside>
-                    </section>
+                    <img src="/img/non-traditional-constituents.png" />
                 </section>
                 <section>
-                    <img src="/img/fish.png" />
-                    <aside class="notes">
-                        <ul>
-                            <li>Scripting helps create a diverse ecosystem.</li>
-                            <li>
-                                At Lafayette, we had specific goals for Grouper.
-                                Your institution will undoubtedly have different goals.
-                                Scripting is an opportunity for customization to meet
-                                individual needs.
-                            </li>
-                            <li>
-                                Diversity brings new perspective and ideas to the table.
-                                It allows others to use what you've built in ways that 
-                                you may never have originally envisioned.
-                            </li>
-                            <li>
-                                <p>
-                                I think supporting different languages, a platforms, and tool 
-                                sets can really be an asset to a project.  When you show people
-                                that you want to work with them, you win converts to your
-                                project.  
-                                </p>
-                            </li>
-                        </ul>
-                    </aside>
+                    <img src="/img/managing-the-small-differences.png" />
                 </section>
                 <section>
-                    <h2>Links</h2>
-                    <ul>
-                        <li><a href="https://github.com/wgthom/groovysh4grouper">https://github.com/wgthom/groovysh4grouper</a></li>
-                        <li><a href="https://github.com/cwaldbieser/grouper_jython_scripts">https://github.com/cwaldbieser/grouper_jython_scripts</a></li>
-                        <li><a href="https://github.com/cwaldbieser/grouper_tools">https://github.com/cwaldbieser/grouper_tools.git</a></li>
-                        <li>This presentation: <a href="https://github.com/cwaldbieser/reveal.js.git">https://github.com/cwaldbieser/reveal.js.git</a>, "apereo2016" branch.</li>
-                    </ul>
+                    <img src="/img/high-tech-idm.png" />
+                </section>
+                <section>
+                    <img src="/img/issues.png" />
+                </section>
+                <section>
+                    <img src="/img/form1.png" />
+                </section>
+                <section>
+                    <img src="/img/form2.png" />
+                </section>
+                <section>
+                    <img src="/img/form3.png" />
                 </section>
 			</div>
 		</div>
