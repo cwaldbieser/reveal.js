@@ -43,18 +43,73 @@
                 </section>
                 <section>
                     <img src="/img/well-managed-identities.png" />
+                    <aside class="notes">
+                        <ul>
+                            <li>When identities are well managed, you can answer interesting questions about them:</li>
+                            <li>How many are there?</li>
+                            <li>What kinds are there?</li>
+                            <li>What access do they have?</li>
+                            <li>When was the identity provisioned?  On whose authority?</li>
+                            <li>When was the identity deprovisioned?  On whose authority?</li>
+                        </ul>
+                    </aside>
                 </section>
                 <section>
                     <img src="/img/non-traditional-constituents.png" />
+                    <aside class="notes">
+                        <ul>
+                            <li>Affiliates like contractors, visiting Fellows, theater troupes, outside reviewers,volunteer coaches and others aren't a good fit for the existing system.</li>
+                            <li>What office authorizes the creation of the identity?</li>
+                            <li>Are they employees? Are they students?</li>
+                            <li>What is the system of record?</li>
+                            <li>Shoe-horning identities where they don't belong makes it harder to answer questions about the well managed identities.  E.g. Q: How many employees identities are there?  A: 750— except for the ones that are really that are really contractors or volunteers...</li>
+                        </ul>
+                    </aside>
                 </section>
                 <section>
                     <img src="/img/managing-the-small-differences.png" />
+                    <aside class="notes">
+                        <ul>
+                            <li>One similarity all accounts needed to share: Unique identifiers.</li>
+                            <li>A conversation with our enterprise data specialists led us to decide that all identities would use the Banner L-Number (aka SPRIDEN ID) as the unique, non-changing ID.</li>
+                            <li>The NetID would be unique and non-reusable, but could change in some circumstances.</li>
+                            <li>Step 1: Operationalize the new system.</li>
+                            <li>HR/Provost should refer requests for "guest" access to the identity team.</li>
+                            <li>The identity team would collect a minimal set of identity attributes from a sponsor. The sponsor would be responsible for his/her guests. Guests would have an expiration date set by default to 6 months.</li>
+                            <li>A simple person record would be entered in Banner to generate the L-number.</li>
+                            <li>The identity team would manually create the LDAP account and record the information in about the sponsor and expiration in a spreadsheet (Google Sheets).</li>
+                            <li>Periodically, the identity team would review the sheet, and notify sponsors about pending expirations. No response could mean the account should be termed.</li>
+                            <li>The identities were managed, but there were some significant gaps:</li>
+                            <li>Account creation is manual which means error prone and labor intensive.</li>
+                            <li>Deprovisioning requires constant polling by the identity team. Long periods of time can go by without a term, so it is easy to forget.</li>
+                        </ul>
+                    </aside>
                 </section>
                 <section>
                     <img src="/img/high-tech-idm.png" />
+                    <aside class="notes">
+                        <ul>
+                            <li>CoManage is a TIER component for managing virtual organizations.</li>
+                            <li>We got the idea that CoManage could be used as a person registry with identity life cycle management built in.</li>
+                            <li>Benn Oshrin from Spherical Cow helped us plan and implement CoManage as a sponsored account system.</li>
+                            <li>The system could create LDAP accounts based on the identity data collected.</li>
+                            <li>The system could automatically send out notifications for account creations and expirations.</li>
+                        </ul>
+                    </aside>
                 </section>
                 <section>
                     <img src="/img/issues.png" />
+                    <aside class="notes">
+                        <ul>
+                            <li>No one had ever deployed CoManage for this use case before.</li>
+                            <li>Some ways the software behaved surprised us.</li>
+                            <li>Notifications might be sent to either the official email or the recovery email.</li>
+                            <li>Notifications for account creation couldn't be delayed.  For example, I want to create an account, then grant some access, then send the notification.</li>
+                            <li>Sometimes there were bugs.</li>
+                            <li>Sometimes, bugs led to embarrassing situations.  In one instance, a DB migration put some sponsors and guests into the admins group for the COU.  Our expiration notifications CC the COU admins.  At one point, we discovered the cron job that fired the notifications had not been completing successfully, so I ran it manually.  Suddenly, a couple dozen sponsors and guests received notifications for people they knew nothing about!</li>
+                            <li>Benn was always available to help us figure out the solutions, so we were able to muddle through.</li>
+                        </ul>
+                    </aside>
                 </section>
                 <section>
                     <img src="/img/form1.png" />
