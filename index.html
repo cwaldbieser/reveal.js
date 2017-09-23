@@ -199,6 +199,53 @@
                             ## Access and Provisioning Policies
 
                             Note:
+                            + Every service at LC whose access control is managed by Grouper has
+                              a folder under the "app" stem.
+                            + Each folder has a similar structure with its own "etc" folder for
+                              managing the policy admins and viewers.
+                            + Policies come in triples: An allow policy, a deny policy, and the
+                              final policy which is allow minus deny. 
+                            + *Only* policies are exported from Grouper to target systems.
+                            + At LC, we place the policies available for export in an "export" sub-folder.
+                              This makes them easy to locate, it makes it clear which policies are going 
+                              to be exported, and it makes configuration easier on the export side.
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="/img/delegate.jpg"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Permissions and Delegation in Grouper
+
+                            Note:
+
+                            * Setting up an *app* in Grouper takes time.  You want to make sure permissions
+                              on the access policies are set correctly.  This is an easilly overlooked step
+                              if the wheel user is the only one doing the configuration.
+                            * At LC, we create app admin and viewer groups in the local "etc" folder for
+                              every app.  One place to manage the permissions for the app makes it maangeable.
+                            * The account use to create a group automatically is assigned as an admin.  This
+                              account should be removed from the permissions on each group.
+
+                        </script>
+                    </section>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="/img/robot-assembly-line.jpg"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Automating Permission Structure
+
+                            Note:
+
+                            * Jython script is used to create consistent apps and permissions.
 
                         </script>
                     </section>
