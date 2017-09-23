@@ -3,7 +3,11 @@ html.bgimage .slide-background.present {
     opacity: 0.6 ;
 }
 
-html.bgimage ul li{
+html.bgimage  p {
+    color: black;
+    font-weight: bold;
+}
+html.bgimage ul li {
     color: black;
     font-weight: bold;
 }
