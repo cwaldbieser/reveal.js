@@ -1,0 +1,21 @@
+
+.white-text {
+    color: white !important; 
+}
+
+.white-text h2 {
+    color: white !important;
+}
+
+html.kinds-of-groups .slide-background.present {
+    opacity: 0.7 ;
+}
+
+html.kinds-of-groups ul li{
+    color: black;
+    font-weight: bold;
+}
+html.kinds-of-groups h2 {
+    color: black;
+    font-weight: bold;
+}

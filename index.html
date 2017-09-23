@@ -20,6 +20,9 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+        
+        <!-- TechEx 2017 Overrides -->
+		<link rel="stylesheet" href="css/techex2017.css">
 	</head>
 	<body>
 		<div class="reveal">
@@ -37,7 +40,13 @@
                             # Topics Covered
                         </script>
                     </section>
-                    <section data-markdown="" data-transition="slide-in fade-out">
+                    <section 
+                        data-state="kinds-of-groups"
+                        data-background-image="/img/kinds-of-fish.jpg" 
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                        xclass="white-text"
+                    >
                         <script type="text/template">
                             ## Kinds of Groups
 
