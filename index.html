@@ -49,9 +49,7 @@
                         <script type="text/template">
                             ## Kinds of Groups
 
-                            * Basis and Reference groups
-                            * Bundles
-                            * Access Control and Provisioning Policies
+                            Groups have similar structure, but not all groups have the same *meaning*.
                         </script>
                     </section>
                     <section 
@@ -63,8 +61,19 @@
                         <script type="text/template">
                             ## The Grouper Permission Model & Delegation
 
-                            * Jython for creating app folders
-                            * Scripts on GitHub
+                            How do you control access to the access control system?
+                        </script>
+                    </section>
+                    <section 
+                        data-state="bgimage"
+                        data-background-image="/img/many-shells.png"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Automating Tasks with the Grouper Shell
+
+                            Some jobs are just too big for point and click.
                         </script>
                     </section>
                     <section 
@@ -76,9 +85,13 @@
                         <script type="text/template">
                             ## Access Control Models
 
-                            * Model 1 case study - Library Services
-                            * Model 2 case study - VPN roles
-                            * Model 3 case study - Cognos & Board Effect
+                            What do policies mean in the *real* world?
+
+                            Note:
+
+                            + Model 1 case study - Library Services
+                            + Model 2 case study - VPN roles
+                            + Model 3 case study - Cognos & Board Effect
                         </script>
                     </section>
                     <section
@@ -90,22 +103,35 @@
                         <script type="text/template" data-transition="slide-in fade-out">
                             ## Provisioning with RabbitMQ exchange
 
-                            * The flexibility of loose coupling
-                            * Kinds of provisioners at Lafayette College: LDAP, SSH, REST/web
-                            * Target systems: OpenLDAP, Moodle, o365 Graph API
+                            From policy definitions to policy enforcement, this is where the
+                            rubber meets the road.
+
+                            Note:
+
+                            + The flexibility of loose coupling
+                            + Kinds of provisioners at Lafayette College: LDAP, SSH, REST/web
+                            + Target systems: OpenLDAP, Moodle, o365 Graph API
                         </script>
                     </section>
                 </section>
                 <section>
-                    <section data-markdown>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="/img/wikipedia-logo.png"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
                         <script type="text/template">
+                            ### Kinds of Groups
                             ## Basis and Reference Groups
+
+                            Sources of truth in Grouper.
+
+                            Note:
 
                             - Loaded from Banner
                             - Maintained in Grouper
                             - Identity life cycle cohorts
-
-                            Note:
 
                             Example note to self ...
                         </script>
@@ -118,10 +144,25 @@
                     >
                         <script type="text/template">
                             ### Loaded from Banner
-                            * employees
-                            * students
-                                * Class years
-                            * alumni
+                            + employees
+                            + students
+                            + alumni
+
+                            Note:
+
+                            + Reference groups are like atoms, but some queries are like sub-atomic
+                              particles.  Their results belong in *basis* groups that can be used
+                              to build up a proper reference group.
+                                - active_positions, temp_emp, : These concepts from the Banner payroll 
+                                  system are *similar* to the employee definitions, but still needs some
+                                  fine tuning to represent an accurate source of truth.
+                                - Employee classification reference groups are either pulled directly 
+                                  from Banner or built up from basis groups.
+                                - Sometimes need to be combined with manually attested groups for edge 
+                                  cases.  E.g. *nonexempt_pt_wo_positions*
+                                - Larger reference groups can be built up from smaller ones.  E.g.
+                                  *students* are composed of each class year, part timers, students on
+                                  leave of absence, etc.
                         </script>
                     </section>
                     <section
@@ -131,15 +172,19 @@
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ### Maintained in Grouper
-                            * Ex Officio roles
-                                * President of the College
-                                * Deans
-                                * Clerk of the Faculty
-                                * Provost
-                            * Sponsored guests
-                            * Trustees and Cabinet
-                                * Maintained by the assistent to the President of the College.
+                            ## Maintained in Grouper
+                            + Ex Officio roles
+                            + Trustees and Cabinet
+                            + Departmental roles
+
+                            Note:
+                            + Ex Officio roles:
+                                - President of the College
+                                - Deans
+                                - Clerk of the Faculty
+                                - Provost
+                            + Trustees and Cabinet
+                                - Maintained by the assistent to the President of the College.
                         </script>
                     </section>
                     <section
@@ -150,11 +195,9 @@
                     >
                         <script type="text/template">
                             ### Life cycle cohorts
-                            * Incoming class / Early onboarded students
-                            * Outgoing class
-                            * Graduates of the previous and current years
-                            * Transfers / expelled / resigned 32 days
-                            * Leave of Absence
+                            + Incoming class / Early onboarded students
+                            + Outgoing class
+                            + Graduates of the previous and current years
                         </script>
                     </section>
                 </section>
@@ -166,11 +209,10 @@
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
+                            ### Kinds of Groups
                             ## Bundles
 
-                            Simply put, bundles are a way to group similar cohorts that tend to have
-                            the same access to the same set of services.  They are a management tool
-                            to make managing permissions simpler.
+                            Bundles group *unrelated* cohorts that have access to the same set of services.
 
                             Note:
 
@@ -196,19 +238,16 @@
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
+                            ### Kinds of Groups
                             ## Access and Provisioning Policies
 
                             Note:
-                            + Every service at LC whose access control is managed by Grouper has
-                              a folder under the "app" stem.
-                            + Each folder has a similar structure with its own "etc" folder for
-                              managing the policy admins and viewers.
-                            + Policies come in triples: An allow policy, a deny policy, and the
-                              final policy which is allow minus deny. 
-                            + *Only* policies are exported from Grouper to target systems.
-                            + At LC, we place the policies available for export in an "export" sub-folder.
-                              This makes them easy to locate, it makes it clear which policies are going 
-                              to be exported, and it makes configuration easier on the export side.
+                            
+                            + Access policies consist of 3 groups: Allow, Deny, 
+                               and the final policy is allow minus deny.
+                            + Policies are where exceptions should be allowed.
+                            + Policies don't represent truth about a cohort; they
+                              describe who is allowed to access a resource. 
                         </script>
                     </section>
                 </section>
@@ -235,18 +274,111 @@
                         </script>
                     </section>
                     <section
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            App structure contains an *etc* folder.
+ 
+                            ![Structure of the Qualtrics app.][qualtrics-app]
+                
+
+                            [qualtrics-app]: /img/app-qualtrics.png
+                            Note:
+                        </script>
+                    </section>
+                    <section
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            The *etc* folder has policy groups for admins
+ 
+                            ![Qualtrics app etc contents][etc-contents]
+                
+
+                            [etc-contents]: /img/app-qualtrics-etc.png
+                            Note:
+                        </script>
+                    </section>
+                    <section
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            The admin and viewer groups are assigned permissions 
+                            on policy groups.
+ 
+                            ![Qualtrics permissions on a policy][allow-privs]
+                            <!-- .element style="width: 75%" -->
+                
+
+                            [allow-privs]: /img/app-qualtrics-allow-privs.png
+                            Note:
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="/img/robot-assembly-line.2.jpg"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Automating Tasks
+
+                            Note:
+
+                        </script>
+                    </section>
+                    <section
                         data-state="bgimage"
                         data-background-image="/img/robot-assembly-line.jpg"
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ## Automating Permission Structure
+                            ## Create Consistent App Structure
 
                             Note:
 
-                            * Jython script is used to create consistent apps and permissions.
+                            + Jython script is used to create consistent structure
+                              and permission assignements.
 
+                        </script>
+                    </section>
+
+                </section>
+                <section>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="/img/ship-in-a-bottle.jpg"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Access Control Models
+
+                            Note:
+                            + Model 1 case study - Library Services
+                            + Model 2 case study - VPN roles
+                            + Model 3 case study - Cognos & Board Effect
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="/img/target.png"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Target Systems
+
+                            Note:
+                        
                         </script>
                     </section>
                 </section>
