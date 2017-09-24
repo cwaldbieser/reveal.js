@@ -153,11 +153,11 @@
                             + Reference groups are like atoms, but some queries are like sub-atomic
                               particles.  Their results belong in *basis* groups that can be used
                               to build up a proper reference group.
-                                - active_positions, temp_emp, : These concepts from the Banner payroll 
-                                  system are *similar* to the employee definitions, but still needs some
-                                  fine tuning to represent an accurate source of truth.
                                 - Employee classification reference groups are either pulled directly 
                                   from Banner or built up from basis groups.
+                                    - active_positions, temp_emp: These concepts from the Banner payroll 
+                                      system are *similar* to the employee definitions, but still needs some
+                                      fine tuning to represent an accurate source of truth.
                                 - Sometimes need to be combined with manually attested groups for edge 
                                   cases.  E.g. *nonexempt_pt_wo_positions*
                                 - Larger reference groups can be built up from smaller ones.  E.g.
@@ -263,6 +263,7 @@
 
                             Note:
 
+                            * Important- never assign permissions directly to a *subject*.
                             * Setting up an *app* in Grouper takes time.  You want to make sure permissions
                               on the access policies are set correctly.  This is an easilly overlooked step
                               if the wheel user is the only one doing the configuration.
