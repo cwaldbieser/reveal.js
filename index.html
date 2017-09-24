@@ -172,7 +172,7 @@
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ## Maintained in Grouper
+                            ### Maintained in Grouper
                             + Ex Officio roles
                             + Trustees and Cabinet
                             + Departmental roles
@@ -200,8 +200,6 @@
                             + Graduates of the previous and current years
                         </script>
                     </section>
-                </section>
-                <section>
                     <section
                         data-state="bgimage"
                         data-background-image="/img/school-of-fish.jpg"
@@ -229,8 +227,6 @@
                                 - Student associates
                         </script>
                     </section>
-                </section>
-                <section>
                     <section
                         data-state="bgimage"
                         data-background-image="/img/access-policy-lock.jpg"
@@ -329,8 +325,11 @@
                         <script type="text/template">
                             ## Automating Tasks
 
-                            Note:
+                            <https://github.com/cwaldbieser/grouper_jython_scripts>
+                            <!-- .element style="font-size: 75%" -->
 
+                            Note:
+                            
                         </script>
                     </section>
                     <section
@@ -344,12 +343,49 @@
 
                             Note:
 
-                            + Jython script is used to create consistent structure
-                              and permission assignements.
+                            + Jython script `skeleton.py` is used to create 
+                              consistent structure and permission assignements.
 
                         </script>
                     </section>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="/img/parking-meter.jpg"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Mass Expirations
 
+                            Note:
+
+                            When students are onboarded, they are added to the early-onboarded
+                            cohort.  We don't want to have to remember to remove them from the
+                            cohort later, after the term starts.
+
+                            Drilling into each membership and setting the expiration time is
+                            tedious.  A Jython script handles this much more simply and consistently.
+
+                        </script>
+                    </section>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="/img/loading.gif"
+                        data-background-size="contain"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Setting up Loader jobs.
+
+                            Note:
+
+                            + Loader jobs can be configured via the Lite UI, 
+                              but there are many small steps.
+                            + `loader_tools.py` Can wire up SQL and simple LDAP
+                              loader jobs.
+                        </script>
+                    </section>
                 </section>
                 <section>
                     <section
