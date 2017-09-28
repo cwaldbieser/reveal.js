@@ -408,7 +408,8 @@
                     </section>
                     <section
                         data-state="bgimage"
-                        data-background-image="./img/ship-in-a-bottle.jpg"
+                        data-background-image="./img/skull-and-crossbones.png"
+                        xdata-background-size="contain"
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
@@ -418,13 +419,16 @@
 
                             Note:
                             
+                            + Please don't use this control model!
+                            + Lafayette used this model pre-Grouper with University Tickets.
                             + Lacks flexibility.
                             + Relies on Cohorts
+                            + We can do better!
                         </script>
                     </section>
                     <section
                         data-state="bgimage"
-                        data-background-image="./img/ship-in-a-bottle.jpg"
+                        data-background-image="./img/traffic-light.png"
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
@@ -433,6 +437,12 @@
                             ## VPN Roles
 
                             Note:
+
+                            + Our VPN is mapped via roles in RADIUS.
+                            + There is a 1-to-1 mapping between LDAP groups and RADIUS roles.
+                            + Network policies are defined in Grouper.  They drive membership in LDAP groups.
+                            + Flexible.  Allows exceptions to policy without altering the truth of reference groups.
+                            + Also used this approach with Duo MFA, Crashplan, EMS, and Google Drive.
                         </script>
                     </section>
                     <section
@@ -443,9 +453,17 @@
                     >
                         <script type="text/template">
                             ### ACM III - RBAC User to Role Mapping
-                            ## Cognos, Board Effect
+                            ## Cognos, Board Effect, Splunk
 
                             Note:
+
+                            + Basic idea is that policies in Grouper map to broad roles in the service.
+                            + The roles are configurable with permissions at the PAP in the service.
+                            + Grouper doesn't need to know every permission set.
+                            + Policies still administered centrally.
+                            + Cognos - Grouper policy to LDAP Group to Cognos role to Cognos permission set.
+                            + Board Effect - Grouper policy to BE workroom to BE permission set.
+                            + Splunk - Grouper policy to LDAP group to Splunk role to Splunk permission set.
                         </script>
                     </section>
                 </section>
