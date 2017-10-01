@@ -447,12 +447,12 @@
                     </section>
                     <section
                         data-state="bgimage"
-                        data-background-image="./img/ship-in-a-bottle.jpg"
+                        data-background-image="./img/antique-keys-01.jpg"
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ### ACM III - RBAC User to Role Mapping
+                            ### ACM III - User - Role - Permission Mapping
                             ## Cognos, Board Effect, Splunk
 
                             Note:
@@ -476,6 +476,55 @@
                     >
                         <script type="text/template">
                             ## Target Systems
+
+                            Note:
+
+                            + Real time changes:
+                                - Grouper emits changes in real time via changelogger.
+                                - Changes are routed on a message bus.
+                                - Provisioners are responsible for provisioning target systems.
+                            + Reconcilliation / full sync
+                                - Batch jobs emit reconcilliation messages.
+                                - Changes are routed on a message bus.
+                                - Provisioners are responsible for provisioning target systems.
+                        
+                        </script>
+                    </section>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="./img/network.jpg"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Routing
+
+                            Note:
+
+                            + Types of routing:
+                                - Bootstrap routing
+                                    + Exchange routes to multiple queues.
+                                - PDS 
+                                    + Unlabeled input of various formats.
+                                    + Route key and exchange encode information about how message will be parsed.
+                                    + Contains logic to map a policy to a routing key.
+                                    + Passed to exchange to ultimately be routed to provisioners.
+                                    + Looks up subject attributes, group memberships; fills in the missing information.
+                                - RabbitMQ Exchange
+                                    - Processes labeled, well-formatted messages.
+                                    - Dispatch and fanout handled by exchange.
+                                    - Allows partitioning of provisioning space.
+                        
+                        </script>
+                    </section>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="./img/target.png"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Provisioner Delivery Service
 
                             Note:
                         
