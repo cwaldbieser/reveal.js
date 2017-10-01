@@ -527,7 +527,29 @@
                             ## Provisioner Delivery Service
 
                             Note:
-                        
+
+                            + Parses incoming messages based on route key and exchange name.
+                            + Can look up groups related to subjects.
+                            + Can apply route keys based on flexible matching.
+                            + Route keys matching multiple provisioners can be applied to a message.
+                            + Newly labeled messages are sent to a RabbitMQ exchange.
+                        </script>
+                    </section>
+                    <section
+                        data-state="bgimage"
+                        data-background-size="contain"
+                        data-background-image="./img/rabbitmq-logo2.png"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## RabbitMQ Exchange
+
+                            Note:
+
+                            + Exchange binds route keys to queues.
+                            + Exchange may route the same message to multiple queues.
+                            + Individual provisioners listen to queues.
                         </script>
                     </section>
                 </section>
