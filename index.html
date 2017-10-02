@@ -530,6 +530,7 @@
 
                             + Parses incoming messages based on route key and exchange name.
                             + Can look up groups related to subjects.
+                            + Can look up attributes for subjects.
                             + Can apply route keys based on flexible matching.
                             + Route keys matching multiple provisioners can be applied to a message.
                             + Newly labeled messages are sent to a RabbitMQ exchange.
@@ -549,9 +550,36 @@
 
                             + Exchange binds route keys to queues.
                             + Exchange may route the same message to multiple queues.
+                            + Multiple provisioners may be interested in the same service (e.g. LDAP & REST API).
                             + Individual provisioners listen to queues.
+                            + Allows partitioning of provisioning (e.g. LDAP groups vs LDAP accounts).
                         </script>
                     </section>
+                    <section
+                        data-state="bgimage"
+                        data-background-image="./img/account-provisioners.jpg"
+                        data-markdown="" 
+                        data-transition="slide-in fade-out"
+                    >
+                        <script type="text/template">
+                            ## Provisioners
+
+                            Note:
+
+                            + Read messages from a single queue.
+                            + Many types:
+                                - LDAP
+                                - REST API
+                                    + Board Effect
+                                    + Slack
+                                    + Office 365
+                                - SSH commands
+                                    + Mailman
+                                    + Zimbra distribution lists
+                                    + Network share access
+                            + Account provisioning
+                            + Membership provisioning
+                        </script>
                 </section>
 			</div>
 		</div>
