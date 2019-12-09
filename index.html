@@ -30,9 +30,8 @@
                 <section>
                     <section data-markdown="">
                         <script type="text/template">
-                            # Grouper 
-                            ### at 
-                            ## Lafayette College
+                            # AWS Federated Identity 
+                            ## at Lafayette College
                         </script>
                     </section>
                     <section 
@@ -57,544 +56,141 @@
                     </section>
                     <section 
                         data-state="bgimage"
-                        data-background-image="./img/kinds-of-fish.jpg" 
+                        data-background-image="./img/topics.png" 
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ## Kinds of Groups
-
-                            Groups have similar structure, but not all groups have the same *meaning*.
-                        </script>
-                    </section>
-                    <section 
-                        data-state="bgimage"
-                        data-background-image="./img/marine-food-web.jpg"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ## The Grouper Permission Model & Delegation
-
-                            How do you control access to the access control system?
-                        </script>
-                    </section>
-                    <section 
-                        data-state="bgimage"
-                        data-background-image="./img/many-shells.png"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ## Automating Tasks with the Grouper Shell
-
-                            Some jobs are just too big for point and click.
-                        </script>
-                    </section>
-                    <section 
-                        data-state="bgimage"
-                        data-background-image="./img/lock.png"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ## Access Control Models
-
-                            What do policies mean in the *real* world?
-
-                            Note:
-
-                            + Model 1 case study - University Tickets
-                            + Model 2 case study - VPN roles
-                            + Model 3 case study - Cognos & Board Effect
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/rabbitmq-logo.png"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template" data-transition="slide-in fade-out">
-                            ## Provisioning with RabbitMQ exchange
-
-                            From policy definitions to policy enforcement, this is where the
-                            rubber meets the road.
-
-                            Note:
-
-                            + The flexibility of loose coupling
-                            + Kinds of provisioners at Lafayette College: LDAP, SSH, REST/web
-                            + Target systems: OpenLDAP, Moodle, o365 Graph API
+                            * What is Federated Identity?
+                            * SAML from 100K feet
+                            * Where we came from.
+                            * Where we're going.
                         </script>
                     </section>
                 </section>
                 <section>
                     <section
                         data-state="bgimage"
-                        data-background-image="./img/wikipedia-logo.png"
+                        data-background-image="./img/federated-identity.png"
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ### Kinds of Groups
-                            ## Basis and Reference Groups
-
-                            Sources of truth in Grouper.
-
-                            Note:
-
-                            - Loaded from Banner
-                            - Maintained in Grouper
-                            - Identity life cycle cohorts
-
-                            Example note to self ...
+                            ## Federated Identity
                         </script>
                     </section>
                     <section
                         data-state="bgimage"
-                        data-background-image="./img/sort-into-groups.jpg"
+                        data-background-image="./img/login-page.png"
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ### Loaded from Banner
-                            + employees
-                            + students
-                            + alumni
+                            ### Logging In
+                            #### World vs. Identity Professions
 
                             Note:
 
-                            + Reference groups are like atoms, but some queries are like sub-atomic
-                              particles.  Their results belong in *basis* groups that can be used
-                              to build up a proper reference group.
-                                - Employee classification reference groups are either pulled directly 
-                                  from Banner or built up from basis groups.
-                                    - active_positions, temp_emp: These concepts from the Banner payroll 
-                                      system are *similar* to the employee definitions, but still needs some
-                                      fine tuning to represent an accurate source of truth.
-                                - Sometimes need to be combined with manually attested groups for edge 
-                                  cases.  E.g. *nonexempt_pt_wo_positions*
-                                - Larger reference groups can be built up from smaller ones.  E.g.
-                                  *students* are composed of each class year, part timers, students on
-                                  leave of absence, etc.
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/centralized.png"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ### Maintained in Grouper
-                            + Ex Officio roles
-                            + Trustees and Cabinet
-                            + Departmental roles
-
-                            Note:
-                            + Ex Officio roles:
-                                - President of the College
-                                - Deans
-                                - Clerk of the Faculty
-                                - Provost
-                            + Trustees and Cabinet
-                                - Maintained by the assistent to the President of the College.
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/cycle.png"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ### Life cycle cohorts
-                            + Incoming class / Early onboarded students
-                            + Outgoing class
-                            + Graduates of the previous and current years
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/school-of-fish.jpg"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ### Kinds of Groups
-                            ## Bundles
-
-                            Bundles group *unrelated* cohorts that have access to the same set of services.
-
-                            Note:
-
-                            + Bundles are a *cohort*, not an access policy.
-                            + If the cohorts were related, they could just be composed in a larger reference group.
-                            + Changes to policies may require splitting up bundles.
-                            + Alternatively, it may make sense to expand a bundle if policies become more broadly applied.
-                            + If you have a lot of churn in bundle composition, you need to ask yourself if you are really saving yourself any effort in terms of management.
-                            + Example: Trustee Services bundle.  Includes:
-                                - Active trustees
-                                - Alumni associates
-                                - Board associates
-                                - Cabinet members
-                                - Student associates
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/access-policy-lock.jpg"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ### Kinds of Groups
-                            ## Access and Provisioning Policies
-
-                            Note:
-                            
-                            + Access policies consist of 3 groups: Allow, Deny, 
-                               and the final policy is allow minus deny.
-                            + Policies are where exceptions should be allowed.
-                            + Policies don't represent truth about a cohort; they
-                              describe who is allowed to access a resource. 
+                            * Logging in seems simple, but can be incredibly complex.
                         </script>
                     </section>
                 </section>
                 <section>
                     <section
                         data-state="bgimage"
-                        data-background-image="./img/delegate.jpg"
+                        data-background-image="./img/abus-lock.png"
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ## Permissions and Delegation in Grouper
+                            ## SAML at 100K Meters
 
                             Note:
 
-                            * Important- never assign permissions directly to a *subject*.
-                            * Setting up an *app* in Grouper takes time.  You want to make sure permissions
-                              on the access policies are set correctly.  This is an easilly overlooked step
-                              if the wheel user is the only one doing the configuration.
-                            * At LC, we create app admin and viewer groups in the local "etc" folder for
-                              every app.  One place to manage the permissions for the app makes it maangeable.
-                            * The account use to create a group automatically is assigned as an admin.  This
-                              account should be removed from the permissions on each group.
 
                         </script>
                     </section>
-                    <section
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
+                    <section 
+                        data-state="bgimage"
+                        data-background-image="./img/2-padlocks.jpeg"
+                        data-transition="slide" 
                     >
-                        <script type="text/template">
-                            App structure contains an *etc* folder.
- 
-                            ![Structure of the Qualtrics app.][qualtrics-app]
-                
-
-                            [qualtrics-app]: ./img/app-qualtrics.png
-                            Note:
-                        </script>
+                        A service provider (SP) sends a SAML request …
                     </section>
-                    <section
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
+                    <section 
+                        data-state="bgimage"
+                        data-background-image="./img/2-padlocks.jpeg"
+                        data-transition="slide"
                     >
-                        <script type="text/template">
-                            The *etc* folder has policy groups for admins
- 
-                            ![Qualtrics app etc contents][etc-contents]
-                
-
-                            [etc-contents]: ./img/app-qualtrics-etc.png
-                            Note:
-                        </script>
+                        to a SAML Identity Provider (IdP) …
                     </section>
-                    <section
-                        data-markdown="" 
+                    <section 
+                        data-state="bgimage"
+                        data-background-image="./img/2-padlocks.jpeg"
                         data-transition="slide-in fade-out"
                     >
-                        <script type="text/template">
-                            The admin and viewer groups are assigned permissions 
-                            on policy groups.
- 
-                            ![Qualtrics permissions on a policy][allow-privs]
-                            <!-- .element style="width: 75%" -->
-                
-
-                            [allow-privs]: ./img/app-qualtrics-allow-privs.png
-                            Note:
-                        </script>
+                        and the IdP authenticates the user.
+                    </section>
+                    <section 
+                        data-state="bgimage"
+                        data-background-image="./img/2-padlocks.jpeg"
+                        data-transition="fade-in slide-out"
+                    >
+                        The SAML response is digitally signed ...
+                    </section>
+                    <section 
+                        data-state="bgimage"
+                        data-background-image="./img/2-padlocks.jpeg"
+                        data-transition="slide"
+                    >
+                        so the SP can verify the response is valid.
                     </section>
                 </section>
                 <section>
                     <section
                         data-state="bgimage"
-                        data-background-image="./img/robot-assembly-line.2.jpg"
+                        data-background-image="./img/stonehenge.jpeg"
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ## Automating Tasks
-
-                            <https://github.com/cwaldbieser/grouper_jython_scripts>
-                            <!-- .element style="font-size: 75%" -->
+                            ## A History of Federated Identity
+                            ### at Lafayette College 
 
                             Note:
                             
                         </script>
                     </section>
+                </section>
+                <section>
                     <section
                         data-state="bgimage"
-                        data-background-image="./img/robot-assembly-line.jpg"
+                        data-background-image="./img/city-in-the-clouds.jpeg"
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ## Create Consistent App Structure
+                            ## Shibboleth IdP on AWS Fargate
 
                             Note:
 
-                            + Jython script `skeleton.py` is used to create 
-                              consistent structure and permission assignements.
-
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/parking-meter.jpg"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ## Mass Expirations
-
-                            Note:
-
-                            When students are onboarded, they are added to the early-onboarded
-                            cohort.  We don't want to have to remember to remove them from the
-                            cohort later, after the term starts.
-
-                            Drilling into each membership and setting the expiration time is
-                            tedious.  A Jython script handles this much more simply and consistently.
-
-                            `temporal.py` can make a group automatically set the expiration of any
-                            member to N days in the future.
-
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/loading.gif"
-                        data-background-size="contain"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ## Setting up Loader jobs.
-
-                            Note:
-
-                            + Loader jobs can be configured via the Lite UI, 
-                              but there are many small steps.
-                            + `loader_tools.py` Can wire up SQL and simple LDAP
-                              loader jobs.
                         </script>
                     </section>
                 </section>
                 <section>
                     <section
                         data-state="bgimage"
-                        data-background-image="./img/ship-in-a-bottle.jpg"
+                        data-background-image="./img/3d-question-mark.png"
                         data-markdown="" 
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ## Access Control Models
+                            ## Questions
 
                             Note:
-                            + Model 1 case study - University Tickets
-                            + Model 2 case study - VPN roles
-                            + Model 3 case study - Cognos & Board Effect
+
                         </script>
                     </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/skull-and-crossbones.png"
-                        xdata-background-size="contain"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ### ACM I - Subject Attributes
-                            ## University Tickets
-
-                            Note:
-                            
-                            + Please don't use this control model!
-                            + Lafayette used this model pre-Grouper with University Tickets.
-                            + Lacks flexibility.
-                            + Relies on Cohorts
-                            + We can do better!
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/traffic-light.png"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ### ACM II - Grouper as PAP and PDP
-                            ## VPN Roles
-
-                            Note:
-
-                            + Our VPN is mapped via roles in RADIUS.
-                            + There is a 1-to-1 mapping between LDAP groups and RADIUS roles.
-                            + Network policies are defined in Grouper.  They drive membership in LDAP groups.
-                            + Flexible.  Allows exceptions to policy without altering the truth of reference groups.
-                            + Also used this approach with Duo MFA, Crashplan, EMS, and Google Drive.
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/antique-keys-01.jpg"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ### ACM III - User - Role - Permission Mapping
-                            ## Cognos, Board Effect, Splunk
-
-                            Note:
-
-                            + Basic idea is that policies in Grouper map to broad roles in the service.
-                            + The roles are configurable with permissions at the PAP in the service.
-                            + Grouper doesn't need to know every permission set.
-                            + Policies still administered centrally.
-                            + Cognos - Grouper policy to LDAP Group to Cognos role to Cognos permission set.
-                            + Board Effect - Grouper policy to BE workroom to BE permission set.
-                            + Splunk - Grouper policy to LDAP group to Splunk role to Splunk permission set.
-                        </script>
-                    </section>
-                </section>
-                <section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/target.png"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ## Target Systems
-
-                            Note:
-
-                            + Real time changes:
-                                - Grouper emits changes in real time via changelogger.
-                                - Changes are routed on a message bus.
-                                - Provisioners are responsible for provisioning target systems.
-                            + Reconcilliation / full sync
-                                - Batch jobs emit reconcilliation messages.
-                                - Changes are routed on a message bus.
-                                - Provisioners are responsible for provisioning target systems.
-                        
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/network.jpg"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ## Routing
-
-                            Note:
-
-                            + Types of routing:
-                                - Bootstrap routing
-                                    + Bootstrap exchange routes to PDS queues.
-                                - PDS 
-                                    + Unlabeled input of various formats.
-                                    + Route key and exchange encode information about how message will be parsed.
-                                    + Contains logic to map a policy to a routing key.
-                                    + Passed to exchange to ultimately be routed to provisioners.
-                                    + Looks up subject attributes, group memberships; fills in the missing information.
-                                - RabbitMQ Exchange
-                                    - Processes labeled, well-formatted messages.
-                                    - Dispatch and fanout handled by exchange.
-                                    - Allows partitioning of provisioning space.
-                        
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/mailbox.jpg"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ## Provisioner Delivery Service
-
-                            Note:
-
-                            + Parses incoming messages based on route key and exchange name.
-                            + Can look up groups related to subjects.
-                            + Can look up attributes for subjects.
-                            + Can apply route keys based on flexible matching.
-                            + Route keys matching multiple provisioners can be applied to a message.
-                            + Newly labeled messages are sent to a RabbitMQ exchange.
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-size="contain"
-                        data-background-image="./img/rabbitmq-logo2.png"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ## RabbitMQ Exchange
-
-                            Note:
-
-                            + Exchange binds route keys to queues.
-                            + Exchange may route the same message to multiple queues.
-                            + Multiple provisioners may be interested in the same service (e.g. LDAP & REST API).
-                            + Individual provisioners listen to queues.
-                            + Allows partitioning of provisioning (e.g. LDAP groups vs LDAP accounts).
-                        </script>
-                    </section>
-                    <section
-                        data-state="bgimage"
-                        data-background-image="./img/account-provisioners.jpg"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
-                    >
-                        <script type="text/template">
-                            ## Provisioners
-
-                            Note:
-
-                            + Read messages from a single queue.
-                            + Many types:
-                                - LDAP
-                                - REST API
-                                    + Board Effect
-                                    + Slack
-                                    + Office 365
-                                - SSH commands
-                                    + Mailman
-                                    + Zimbra distribution lists
-                                    + Network share access
-                            + Account provisioning
-                            + Membership provisioning
-                        </script>
                 </section>
 			</div>
 		</div>
