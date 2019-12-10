@@ -91,28 +91,13 @@
                     <section
                         data-state="bgimage"
                         data-background-image="./img/abus-lock.png"
-                        data-markdown="" 
-                        data-transition="slide-in fade-out"
                     >
                         <h2> SAML at 100K Meters</h2>
-                        <p class="fragment slide-in">
-                        A service provider (SP) sends a SAML request …
-                        </p>
-                        <p class="fragment slide-in">
-                        to a SAML Identity Provider (IdP) …
-                        </p>
-                        <p class="fragment slide-in">
-                        and the IdP authenticates the user.
-                        </p>
-                        <p class="fragment slide-in">
-                        and the IdP authenticates the user.
-                        </p>
-                        <p class="fragment fade-in">
-                        The SAML response is digitally signed ...
-                        </p>
-                        <p class="fragment slide-in">
-                        so the SP can verify the response is valid.
-                        </p>
+                        <p class="fragment"> A service provider (SP) sends a SAML request ... </p>
+                        <p class="fragment"> to a SAML Identity Provider (IdP) ...</p>
+                        <p class="fragment"> and the IdP authenticates the user.</p>
+                        <p class="fragment"> The SAML response is digitally signed ...</p>
+                        <p class="fragment"> so the SP can verify the response is valid.</p>
                     </section>
                 </section>
                 <section>
@@ -123,11 +108,15 @@
                         data-transition="slide-in fade-out"
                     >
                         <script type="text/template">
-                            ## A History of Federated Identity
+                            ## A History of Federated SSO
                             ### at Lafayette College 
 
                             Note:
-                            
+                           
+                            * Started with a single Internet-facing IdP on virtualized infrastructure.
+                            * Improved availability by having multiple nodes behind a proxy.
+                            * Adopted ITAP container for IdP.
+                            * Deployed container to AWS Fargate.  
                         </script>
                     </section>
                 </section>
@@ -144,6 +133,11 @@
                             Note:
 
                         </script>
+                    </section>
+                    <section
+                        data-transition="slide-in fade-out"
+                    >
+                        <img class="stretch" src="./img/idp-deployment-arch.png" />
                     </section>
                 </section>
                 <section>
